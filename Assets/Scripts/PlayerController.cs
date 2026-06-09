@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private float runSpeed = 6f; 
     private Vector2 direction;
 
+    private bool isAttack;
 
 
     void Start()
@@ -34,6 +35,12 @@ public class PlayerController : MonoBehaviour
 
         Flip();
         PlayerRun();
+        OnAttack();
+
+        if (isAttack)
+        {
+            _anim.SetInteger("Movimento", 1);
+        }
     }
 
     private void FixedUpdate()
@@ -68,9 +75,21 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void OnAttack()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            isAttack = true;
+            moveSpeed = 0;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            isAttack = false;
+            moveSpeed = initialSpeed;
+        }
+    }
+
 
 
 }
-
-
-
