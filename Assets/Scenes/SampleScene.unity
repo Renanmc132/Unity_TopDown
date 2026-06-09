@@ -6234,7 +6234,7 @@ GameObject:
   - component: {fileID: 1061157686}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6421,6 +6421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1192724192}
   - component: {fileID: 1192724193}
+  - component: {fileID: 1192724194}
   m_Layer: 0
   m_Name: AreaDetection
   m_TagString: Untagged
@@ -6478,7 +6479,21 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 3
+  m_Radius: 4
+--- !u!114 &1192724194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192724191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2960fa63ff2d65441b05deef859bdaf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DetectionController
+  tagTargetDetection: Player
+  detectedObjs: []
 --- !u!1 &1267153665
 GameObject:
   m_ObjectHideFlags: 0
