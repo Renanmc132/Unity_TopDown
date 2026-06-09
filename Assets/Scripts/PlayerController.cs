@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         if (isAttack)
         {
-            _anim.SetInteger("Movimento", 1);
+            _anim.SetInteger("Movimento", 2);
         }
     }
 
@@ -77,13 +77,13 @@ public class PlayerController : MonoBehaviour
 
     void OnAttack()
     {
-        if(Input.GetKeyDown(KeyCode.LeftControl))
+        if(Input.GetKeyDown(KeyCode.LeftControl) || Input.GetMouseButtonDown(0))
         {
             isAttack = true;
             moveSpeed = 0;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftControl))
+        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetMouseButtonUp(0))
         {
             isAttack = false;
             moveSpeed = initialSpeed;
