@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _anim;
     private float moveSpeed = 5f;
+    private float initialSpeed;
+    [SerializeField] private float runSpeed = 6f; 
     private Vector2 direction;
 
 
@@ -13,6 +15,8 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
+
+        initialSpeed = moveSpeed;
     }
 
     void Update()
@@ -29,7 +33,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Flip();
-
+        PlayerRun();
     }
 
     private void FixedUpdate()
@@ -50,4 +54,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void PlayerRun()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            moveSpeed = runSpeed;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            moveSpeed = initialSpeed;
+        }
+
+    }
+
+
+
 }
+
+
+
