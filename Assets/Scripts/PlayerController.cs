@@ -22,10 +22,23 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        direction = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
+        PlayerRun();
+        OnAttack();
 
-        if (direction.sqrMagnitude > 0)
+        
+    }
+
+    private void FixedUpdate()
+    {
+        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        if (direction.sqrMagnitude > 0.1f)
         {
+            MovePlayer();
+
+            _anim.SetFloat("X", direction.x);
+            _anim.SetFloat("Y", direction.y);
+
             _anim.SetInteger("Movimento", 1);
         }
         else
@@ -33,17 +46,17 @@ public class PlayerController : MonoBehaviour
             _anim.SetInteger("Movimento", 0);
         }
 
-        Flip();
-        PlayerRun();
-        OnAttack();
-
         if (isAttack)
         {
             _anim.SetInteger("Movimento", 2);
         }
+
+
+
+
     }
 
-    private void FixedUpdate()
+    private void MovePlayer()
     {
         _rb.MovePosition(_rb.position + direction.normalized * moveSpeed * Time.fixedDeltaTime);
     }
