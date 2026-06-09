@@ -8347,6 +8347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8240906c289717c41ac2ae5562c57565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeController
+  _detecController: {fileID: 1192724194}
 --- !u!50 &1736231550
 Rigidbody2D:
   serializedVersion: 5
