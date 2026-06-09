@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     private Animator _anim;
     private float moveSpeed = 5f;
     private float initialSpeed;
-    [SerializeField] private float runSpeed = 6f; 
+    private float runSpeed = 6f; 
     private Vector2 direction;
 
 
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(_rb.position + direction.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 
     void Flip()
