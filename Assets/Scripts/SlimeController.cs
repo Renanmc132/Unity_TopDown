@@ -3,11 +3,10 @@ using UnityEngine;
 public class SlimeController : MonoBehaviour
 {
 
-    private float moveSpeed = 4f;
     private Vector2 direction;
     private Rigidbody2D _rb;
     public DetectionController _detecController;
-
+    private float moveSpeed = 4f;
     private SpriteRenderer _sprRenderer;
 
 
@@ -17,14 +16,13 @@ public class SlimeController : MonoBehaviour
         _sprRenderer = GetComponent<SpriteRenderer>();
     }
 
-
     private void FixedUpdate()
     {
         if(_detecController.detectedObjs.Count > 0)
         {
             direction = (_detecController.detectedObjs[0].transform.position - transform.position).normalized;
         
-            _rb.MovePosition(_rb.position + direction * moveSpeed *Time.fixedDeltaTime);
+            _rb.MovePosition(_rb.position + direction * moveSpeed * Time.fixedDeltaTime);
         }
 
         if (direction.x > 0)

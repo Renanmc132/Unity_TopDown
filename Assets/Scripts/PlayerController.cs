@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,6 +11,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 direction;
 
     private bool isAttack;
+    private float attackDuration = 0.4f;
+    public GameObject attackArea;
+    [SerializeField] private float attackAreaSize = 0.5f;
+    
 
 
     void Start()
@@ -22,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+
         PlayerRun();
         OnAttack();
 
@@ -49,7 +56,13 @@ public class PlayerController : MonoBehaviour
         if (isAttack)
         {
             _anim.SetInteger("Movimento", 2);
+            
         }
+
+        float posX = direction.x * 0.553f;
+        float posY = direction.y * 0.3f;
+
+        attackArea.transform.localPosition = new Vector2(posX,posY);
 
 
 
@@ -59,18 +72,6 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         _rb.MovePosition(_rb.position + direction.normalized * moveSpeed * Time.fixedDeltaTime);
-    }
-
-    void Flip()
-    {
-        if (direction.x > 0)
-        {
-            transform.eulerAngles = new Vector2(0f, 0f);
-        }
-        else if (direction.x < 0)
-        {
-            transform.eulerAngles = new Vector2(0f, 180f);
-        }
 
     }
 
@@ -92,17 +93,25 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftControl) || Input.GetMouseButtonDown(0))
         {
-            isAttack = true;
-            moveSpeed = 0;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetMouseButtonUp(0))
-        {
-            isAttack = false;
-            moveSpeed = initialSpeed;
+            if(!isAttack)
+                StartCoroutine(AttackCorou());
+            
         }
     }
 
+    private IEnumerator AttackCorou()
+    {
+        isAttack = true;
+        moveSpeed = 0;
+        yield return new WaitForSeconds(attackDuration);
+        moveSpeed = 4f;
+        isAttack = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackArea.transform.position, attackAreaSize);
+    }
 
 
 }
